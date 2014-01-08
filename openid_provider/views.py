@@ -100,7 +100,7 @@ def openid_server(request):
             logger.debug('checkid_immediate mode not supported')
             raise Exception('checkid_immediate mode not supported')
         else:
-            request.session['OPENID_REQUEST'] = orequest
+            request.session['OPENID_REQUEST'] = orequest.message.toPostArgs()
             request.session['OPENID_TRUSTROOT_VALID'] = trust_root_valid
             logger.debug('redirecting to decide page')
             return HttpResponseRedirect(reverse('openid-provider-decide'))
@@ -146,7 +146,9 @@ def openid_decide(request):
     # If user is logged in, ask if they want to trust this trust_root
     # If they are NOT logged in, show the landing page
     """
-    orequest = request.session.get('OPENID_REQUEST')
+    server = Server(get_store(request),
+	op_endpoint=request.build_absolute_uri(reverse('openid-provider-root')))
+    orequest = server.decodeRequest(request.session.get('OPENID_REQUEST'))
     trust_root_valid = request.session.get('OPENID_TRUSTROOT_VALID')
 
     if not request.user.is_authenticated():
@@ -204,7 +206,7 @@ def landing_page(request, orequest, login_url=None,
     but is not authenticated with the site. For idproxy.net, a message telling
     them to log in manually is displayed.
     """
-    request.session['OPENID_REQUEST'] = orequest
+    request.session['OPENID_REQUEST'] = orequest.message.toPostArgs()
     if not login_url:
         login_url = settings.LOGIN_URL
     path = request.get_full_path()
