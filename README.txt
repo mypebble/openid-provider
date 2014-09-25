@@ -7,7 +7,11 @@ http://django-openid-provider.readthedocs.org/
 Check for new releases and report bugs at:
 http://bitbucket.org/romke/django_openid_provider/
 
+This is a fork of the main repo maintained by Pebble that addresses minor
+compatibilities between the original library and custom user models.
+
 Copyright (C) 2010 Roman Barczyński
+Copyright (C) 2014 SF Software limited t/a Pebble
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

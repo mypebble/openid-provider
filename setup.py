@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "django_openid_provider",
-    version = "0.6",
-    author = u"Roman Barczyński",
-    description = "An OpenID provider for your django.contrib.auth accounts",
+    name = "openid-provider-pebble",
+    version = "0.7",
+    author = u"Scott Walton",
+    description = "Pebble fork of django_openid_provider",
     long_description = open("README.txt").read(),
     license = "Apache",
     url = "http://django-openid-provider.readthedocs.org/",
