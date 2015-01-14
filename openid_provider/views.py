@@ -33,11 +33,12 @@ from openid_provider.models import TrustedRoot
 
 logger = logging.getLogger(__name__)
 
+
 @csrf_exempt
 def openid_server(request):
     """
-    This view is the actual OpenID server - running at the URL pointed to by 
-    the <link rel="openid.server"> tag. 
+    This view is the actual OpenID server - running at the URL pointed to by
+    the <link rel="openid.server"> tag.
     """
     logger.debug('server request %s: %s',
                  request.method, request.POST or request.GET)
@@ -112,6 +113,7 @@ def openid_server(request):
 
     return prep_response(request, orequest, oresponse, server)
 
+
 def openid_xrds(request, identity=False, id=None):
     if identity:
         types = [OPENID_2_0_TYPE]
@@ -120,11 +122,16 @@ def openid_xrds(request, identity=False, id=None):
         if conf.AX_EXTENSION:
             types.append(ax.AXMessage.ns_uri)
     endpoints = [request.build_absolute_uri(reverse('openid-provider-root'))]
-    return render_to_response('openid_provider/xrds.xml', {
-        'host': request.build_absolute_uri('/'),
-        'types': types,
-        'endpoints': endpoints,
-    }, context_instance=RequestContext(request), mimetype=YADIS_CONTENT_TYPE)
+    return render_to_response(
+        'openid_provider/xrds.xml',
+        {
+            'host': request.build_absolute_uri('/'),
+            'types': types,
+            'endpoints': endpoints,
+        },
+        context_instance=RequestContext(request),
+        content_type=YADIS_CONTENT_TYPE)
+
 
 def openid_decide(request):
     """
@@ -165,11 +172,13 @@ def openid_decide(request):
         'identity': orequest.identity,
     }, context_instance=RequestContext(request))
 
+
 def error_page(request, msg):
     return render_to_response('openid_provider/error.html', {
         'title': _('Error'),
         'msg': msg,
     }, context_instance=RequestContext(request))
+
 
 class SafeQueryDict(QueryDict):
     """
@@ -190,10 +199,11 @@ class SafeQueryDict(QueryDict):
                            for v in list_])
         return '&'.join(output)
 
+
 def landing_page(request, orequest, login_url=None,
                  redirect_field_name=REDIRECT_FIELD_NAME):
     """
-    The page shown when the user attempts to sign in somewhere using OpenID 
+    The page shown when the user attempts to sign in somewhere using OpenID
     but is not authenticated with the site. For idproxy.net, a message telling
     them to log in manually is displayed.
     """
@@ -208,9 +218,10 @@ def landing_page(request, orequest, login_url=None,
         login_url_parts[4] = querystring.urlencode(safe='/')
     return HttpResponseRedirect(urlparse.urlunparse(login_url_parts))
 
+
 def openid_is_authorized(request, identity_url, trust_root):
     """
-    Check that they own the given identity URL, and that the trust_root is 
+    Check that they own the given identity URL, and that the trust_root is
     in their whitelist of trusted sites.
     """
     if not request.user.is_authenticated():
@@ -224,6 +235,7 @@ def openid_is_authorized(request, identity_url, trust_root):
         return None
 
     return openid
+
 
 def openid_get_identity(request, identity_url):
     """

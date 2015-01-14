@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "openid-provider-pebble",
-    version = "0.7",
+    version = "0.8",
     author = u"Scott Walton",
     description = "Pebble fork of django_openid_provider",
     long_description = open("README.txt").read(),
