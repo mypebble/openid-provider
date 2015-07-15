@@ -1,14 +1,15 @@
-Django OpenID Provider application acts as OpenID provider (in lame terms
-Server) for your `django.contrib.auth` accounts.
+OpenID Provider
+===============
 
-See docs/ directory for documentation or browse it online at:
-http://django-openid-provider.readthedocs.org/
+Turn your Django app into an OpenID Provider!
+
+This app is a fork of the original django-openid-provider package. For now, it
+remains API compatible with the original, documented at:
+http://django-openid-provider.readthedocs.org/. This fork is actively maintained
+by Pebble and, as such, will remain compatible with the latest Django versions.
 
 Check for new releases and report bugs at:
-http://bitbucket.org/romke/django_openid_provider/
-
-This is a fork of the main repo maintained by Pebble that addresses minor
-compatibilities between the original library and custom user models.
+https://github.com/mypebble/openid-provider/
 
 Copyright (C) 2010 Roman Barczyński
 Copyright (C) 2014 SF Software limited t/a Pebble

@@ -7,7 +7,7 @@ from urllib import urlencode, quote
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect, QueryDict
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
@@ -55,7 +55,8 @@ def openid_server(request):
     querydict = dict(request.REQUEST.items())
     orequest = server.decodeRequest(querydict)
     if not orequest:
-        orequest = server.decodeRequest(request.session.get('OPENID_REQUEST', None))
+        orequest = server.decodeRequest(
+            request.session.get('OPENID_REQUEST', None))
         if orequest:
             # remove session stored data:
             del request.session['OPENID_REQUEST']
