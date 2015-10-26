@@ -2,18 +2,18 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "openid-provider-pebble",
-    version = "0.9",
-    author = u"Scott Walton",
-    description = "Pebble fork of django_openid_provider",
-    long_description = open("README.txt").read(),
-    license = "Apache",
-    url = "http://django-openid-provider.readthedocs.org/",
-    download_url = "https://github.com/mypebble/openid-provider/",
+    name="openid-provider-pebble",
+    version="0.9",
+    author=u"Scott Walton",
+    description="Pebble fork of django_openid_provider",
+    long_description=open("README.txt").read(),
+    license="Apache",
+    url="http://django-openid-provider.readthedocs.org/",
+    download_url="https://github.com/mypebble/openid-provider/",
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    classifiers = [
+    classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
